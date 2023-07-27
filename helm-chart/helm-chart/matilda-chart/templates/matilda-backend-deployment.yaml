@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matilda-backend
+  namespace: kubeflow
+spec:
+  replicas: {{.Values.backend-replicaCount}}
+  selector:
+    matchLabels:
+      app: matilda-backend
+  template:
+    metadata:
+      labels:
+        app: matilda-backend
+    spec:
+      hostNetwork: false
+      volumes:
+        - name: project-pv
+          persistentVolumeClaim:
+            claimName: project-pv-claim
+        - hostPath:
+            path: /var/run/docker.sock
+          name: dockersock
+        - name: docker-config
+          secret:
+            defaultMode: 420
+            items:
+            - key: .dockerconfigjson
+              path: config.json
+            secretName: regcred
+      containers:
+      - name: matilda-backend
+        image: {{.Values.backend-repositoryhost}}/{{.Values.imagename}}:{{.Values.imagetag}}
+        command: ["gunicorn"]
+        args: ["mlopsapi.wsgi:application", "--timeout", "15", "--bind", "0.0.0.0:8000", "--env", "DJANGO_SETTINGS_MODULE={{.Values.settingsModule}}", "-w", "3"]
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: KUBECONFIG
+          value: {{.Values.backend-kubeconfigpath}}
+        ports: []
+        resources:
+          limits:
+            cpu: "2"
+            memory: "2000Mi"
+          requests:
+            cpu: 10m
+            memory: "200Mi"
+        volumeMounts:
+          - mountPath: "/home/mlops/project"
+            name: project-pv
+          - mountPath: /var/run/docker.sock
+            name: dockersock
+          - mountPath: /home/mlops/.docker/
+            name: docker-config
+        ports:
+        - containerPort: 8000
+      imagePullSecrets:
+      - name: regcred
