@@ -4,7 +4,7 @@ metadata:
   name: matilda-backend
   namespace: kubeflow
 spec:
-  replicas: {{.Values.backend-replicaCount}}
+  replicas: {{.Values.backend_replicaCount}}
   selector:
     matchLabels:
       app: matilda-backend
@@ -30,13 +30,13 @@ spec:
             secretName: regcred
       containers:
       - name: matilda-backend
-        image: {{.Values.backend-repositoryhost}}/{{.Values.imagename}}:{{.Values.imagetag}}
+        image: {{.Values.backend_repositoryhost}}/{{.Values.imagename}}:{{.Values.imagetag}}
         command: ["gunicorn"]
         args: ["mlopsapi.wsgi:application", "--timeout", "15", "--bind", "0.0.0.0:8000", "--env", "DJANGO_SETTINGS_MODULE={{.Values.settingsModule}}", "-w", "3"]
         imagePullPolicy: IfNotPresent
         env:
         - name: KUBECONFIG
-          value: {{.Values.backend-kubeconfigpath}}
+          value: {{.Values.backend_kubeconfigpath}}
         ports: []
         resources:
           limits:
