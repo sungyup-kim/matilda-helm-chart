@@ -2,8 +2,18 @@ apiVersion: v1
 entries:
   matilda-chart:
   - apiVersion: v2
+    appVersion: 1.16.3
+    created: "2023-07-27T17:12:45.986898+09:00"
+    description: A Helm chart for Kubernetes
+    digest: b43f00baf5468373d45af36f8293e1251c7c21543ea2ed0d147d0e6b5b9bd0b3
+    name: matilda-chart
+    type: application
+    urls:
+    - https://sungyup-kim.github.io/helm-chart/matilda-chart-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
     appVersion: 1.16.2
-    created: "2023-07-27T17:11:17.00801+09:00"
+    created: "2023-07-27T17:12:45.986324+09:00"
     description: A Helm chart for Kubernetes
     digest: 5881fd6edab50e27372dcc5459b066fd7c97d89461ef9a46a1d4d0b11f4b9acf
     name: matilda-chart
@@ -13,7 +23,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 1.16.1
-    created: "2023-07-27T17:11:17.007415+09:00"
+    created: "2023-07-27T17:12:45.985877+09:00"
     description: A Helm chart for Kubernetes
     digest: 005c350aef5846d96839585966f849a0cd19a4168cc11139e49a10015cc0ae8c
     name: matilda-chart
@@ -23,7 +33,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-07-27T17:11:17.006173+09:00"
+    created: "2023-07-27T17:12:45.985201+09:00"
     description: A Helm chart for Kubernetes
     digest: c45312d81559853b5fb24ba68448b4568fe0af6efd359779541e224b892d605c
     name: matilda-chart
@@ -31,4 +41,4 @@ entries:
     urls:
     - https://sungyup-kim.github.io/helm-chart/matilda-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2023-07-27T17:11:17.00417+09:00"
+generated: "2023-07-27T17:12:45.98429+09:00"
