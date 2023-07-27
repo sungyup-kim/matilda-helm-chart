@@ -1,18 +1,4 @@
 ---
-# Source: matilda-chart/templates/matilda-backend-service.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: matilda-backend
-  namespace: kubeflow
-spec:
-  selector:
-    app: matilda-backend
-  type: ClusterIP
-  ports:
-    - port: 9000
-      targetPort: 8000
----
 # Source: matilda-chart/templates/matilda-backend-pvc.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -26,6 +12,20 @@ spec:
     requests:
       storage: 10Gi
   volumeMode: Filesystem
+---
+# Source: matilda-chart/templates/matilda-backend-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: matilda-backend
+  namespace: kubeflow
+spec:
+  selector:
+    app: matilda-backend
+  type: ClusterIP
+  ports:
+    - port: 9000
+      targetPort: 8000
 ---
 # Source: matilda-chart/templates/matilda-backend-deployment.yaml
 apiVersion: apps/v1
@@ -60,7 +60,7 @@ spec:
             secretName: regcred
       containers:
       - name: matilda-backend
-        image: nexus.mlops.matilda-mzc.com/:
+        image: "nexus.mlops.matilda-mzc.com/:"
         command: ["gunicorn"]
         args: ["mlopsapi.wsgi:application", "--timeout", "15", "--bind", "0.0.0.0:8000", "--env", "DJANGO_SETTINGS_MODULE=", "-w", "3"]
         imagePullPolicy: IfNotPresent
