@@ -3,12 +3,12 @@ entries:
   matilda-chart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-07-27T13:51:27.676729+09:00"
+    created: "2023-07-27T13:53:43.563733+09:00"
     description: A Helm chart for Kubernetes
     digest: c45312d81559853b5fb24ba68448b4568fe0af6efd359779541e224b892d605c
     name: matilda-chart
     type: application
     urls:
-    - https://mattiaperi.github.io/helm-chart/matilda-chart-0.1.0.tgz
+    - https://sungyup-kim.github.io/helm-chart/matilda-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2023-07-27T13:51:27.675427+09:00"
+generated: "2023-07-27T13:53:43.562892+09:00"
